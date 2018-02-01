@@ -6,7 +6,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
-import java.util.Set;
 
 @Data
 @Document
@@ -21,9 +20,9 @@ public class User implements UserDetails {
     private boolean credentialsNonExpired;
     private boolean enabled;
     private List<Role> authorities;
-    private List<Ticket> tickets;
+    private List<String> tickets;
 
-    public User(String username, String password, String name, boolean accountNonExpired, boolean accountNonLocked, boolean credentialsNonExpired, boolean enabled, List<Role> authorities, List<Ticket> tickets) {
+    public User(String username, String password, String name, boolean accountNonExpired, boolean accountNonLocked, boolean credentialsNonExpired, boolean enabled, List<Role> authorities, List<String> tickets) {
         this.username = username;
         this.password = password;
         this.name = name;
