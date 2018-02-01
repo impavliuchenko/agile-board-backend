@@ -1,6 +1,7 @@
 package com.agileboard.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
 @Document
 public class User implements UserDetails {
     @Id
