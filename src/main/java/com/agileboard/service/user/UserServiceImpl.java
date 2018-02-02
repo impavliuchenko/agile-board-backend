@@ -4,6 +4,7 @@ import com.agileboard.exception.EmailAlreadyExistsException;
 import com.agileboard.model.User;
 import com.agileboard.persistence.UserRepository;
 import lombok.NonNull;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,7 +24,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findById(@NonNull Long id) {
+    public Optional<User> findById(@NonNull ObjectId id) {
         return userRepository.findById(id);
     }
 

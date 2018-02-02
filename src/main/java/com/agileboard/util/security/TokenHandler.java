@@ -6,6 +6,7 @@ import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.NonNull;
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -27,19 +28,19 @@ public class TokenHandler {
         secretKey = new SecretKeySpec(decodedKey, 0, decodedKey.length, "AES");
     }
 
-    public Optional<Long> extractUserId(@NonNull String token) {
+    public Optional<ObjectId> extractUserId(@NonNull String token) {
         try {
             Jws<Claims> claimsJws = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
             Claims body = claimsJws.getBody();
             return Optional
                     .ofNullable(body.getId())
-                    .map(Long::new);
+                    .map(ObjectId::new);
         } catch (RuntimeException e) {
             return Optional.empty();
         }
     }
 
-    public String generateAccessToken(@NonNull Long id, @NonNull LocalDateTime expires){
+    public String generateAccessToken(@NonNull ObjectId id, @NonNull LocalDateTime expires){
         return Jwts.builder()
                 .setId(id.toString())
                 .setExpiration(Date.from(expires.atZone(ZoneId.systemDefault()).toInstant()))
