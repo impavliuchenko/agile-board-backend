@@ -1,4 +1,4 @@
-package com.agileboard.service;
+package com.agileboard.service.ticket;
 
 import com.agileboard.model.Role;
 import com.agileboard.model.Ticket;
@@ -18,17 +18,18 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class TicketService {
+public class TicketServiceImpl implements TicketService {
 
     private TicketRepository ticketRepository;
     private UserRepository userRepository;
 
     @Autowired
-    public TicketService(TicketRepository ticketRepository, UserRepository userRepository) {
+    public TicketServiceImpl(TicketRepository ticketRepository, UserRepository userRepository) {
         this.ticketRepository = ticketRepository;
         this.userRepository = userRepository;
     }
 
+    @Override
     public Ticket changeStatus(ObjectId id, TicketStatus status) {
         Ticket ticket = ticketRepository.findOne(id.toString());
         switch (status) {

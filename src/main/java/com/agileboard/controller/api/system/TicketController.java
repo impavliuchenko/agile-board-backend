@@ -1,8 +1,7 @@
 package com.agileboard.controller.api.system;
 
-import com.agileboard.model.Ticket;
 import com.agileboard.model.util.TicketStatus;
-import com.agileboard.service.TicketService;
+import com.agileboard.service.ticket.TicketServiceImpl;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.PersistentEntityResource;
@@ -14,10 +13,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("tickets")
 public class TicketController {
 
-    private final TicketService ticketService;
+    private final TicketServiceImpl ticketService;
 
     @Autowired
-    public TicketController(TicketService ticketService) {
+    public TicketController(TicketServiceImpl ticketService) {
         this.ticketService = ticketService;
     }
 
