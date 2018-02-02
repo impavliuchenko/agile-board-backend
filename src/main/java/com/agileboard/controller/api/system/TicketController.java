@@ -13,30 +13,32 @@ import org.springframework.web.bind.annotation.*;
 @RepositoryRestController
 @RequestMapping("tickets")
 public class TicketController {
-//    the same data rest makes for me:
-//
-//    @Autowired
-//    private TicketService ticketService;
-//
-//    @PutMapping("/{id}/progress")
-//    @ResponseBody
-//    public PersistentEntityResource toInProgress(@PathVariable("id") ObjectId id,
-//                                                 PersistentEntityResourceAssembler asm){
-//        return asm.toFullResource(ticketService.changeStatus(id, TicketStatus.IN_PROGRESS));
-//    }
-//
-//    @PutMapping("/{id}/done")
-//    @ResponseBody
-//    public PersistentEntityResource toDone(@PathVariable("id") ObjectId id,
-//                                                 PersistentEntityResourceAssembler asm){
-//        return asm.toFullResource(ticketService.changeStatus(id, TicketStatus.DONE));
-//    }
-//
-//    @PutMapping("/{id}/todo")
-//    @ResponseBody
-//    public PersistentEntityResource toTodo(@PathVariable("id") ObjectId id,
-//                                           PersistentEntityResourceAssembler asm){
-//        return asm.toFullResource(ticketService.changeStatus(id, TicketStatus.TODO));
-//    }
 
+    private final TicketService ticketService;
+
+    @Autowired
+    public TicketController(TicketService ticketService) {
+        this.ticketService = ticketService;
+    }
+
+    @PutMapping("/{id}/progress")
+    @ResponseBody
+    public PersistentEntityResource toInProgress(@PathVariable("id") ObjectId id,
+                                                 PersistentEntityResourceAssembler asm){
+        return asm.toFullResource(ticketService.changeStatus(id, TicketStatus.IN_PROGRESS));
+    }
+
+    @PutMapping("/{id}/done")
+    @ResponseBody
+    public PersistentEntityResource toDone(@PathVariable("id") ObjectId id,
+                                                 PersistentEntityResourceAssembler asm){
+        return asm.toFullResource(ticketService.changeStatus(id, TicketStatus.DONE));
+    }
+
+    @PutMapping("/{id}/todo")
+    @ResponseBody
+    public PersistentEntityResource toTodo(@PathVariable("id") ObjectId id,
+                                           PersistentEntityResourceAssembler asm){
+        return asm.toFullResource(ticketService.changeStatus(id, TicketStatus.TODO));
+    }
 }

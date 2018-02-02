@@ -29,26 +29,22 @@ public class TicketService {
         this.userRepository = userRepository;
     }
 
-    public List<User> getAllTickets(){
-        return userRepository.findAll();
+    public Ticket changeStatus(ObjectId id, TicketStatus status) {
+        Ticket ticket = ticketRepository.findOne(id.toString());
+        switch (status) {
+            case TODO:
+                ticket.setStatus(TicketStatus.TODO);
+                break;
+            case IN_PROGRESS:
+                ticket.setStatus(TicketStatus.IN_PROGRESS);
+                break;
+            case DONE:
+                ticket.setStatus(TicketStatus.DONE);
+                break;
+        }
+        ticketRepository.save(ticket);
+        return ticket;
     }
-
-//    public Ticket changeStatus(ObjectId id, TicketStatus status) {
-//        Ticket ticket = ticketRepository.findOne(id.toString());
-//        switch (status) {
-//            case TODO:
-//                ticket.setStatus(TicketStatus.TODO);
-//                break;
-//            case IN_PROGRESS:
-//                ticket.setStatus(TicketStatus.IN_PROGRESS);
-//                break;
-//            case DONE:
-//                ticket.setStatus(TicketStatus.DONE);
-//                break;
-//        }
-//        ticketRepository.save(ticket);
-//        return ticket;
-//    }
 
 //    @PostConstruct
 //    public void init() {

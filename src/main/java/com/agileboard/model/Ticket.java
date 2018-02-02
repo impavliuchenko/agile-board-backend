@@ -6,13 +6,15 @@ import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.hateoas.Identifiable;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @Document
-public class Ticket {
+public class Ticket implements Identifiable<Serializable> {
     @Id
     private ObjectId id;
     private String name;
