@@ -25,7 +25,8 @@ public class User implements UserDetails {
     private List<Role> authorities;
     private List<ObjectId> tickets;
 
-    public User(String username, String password, String name, boolean accountNonExpired, boolean accountNonLocked, boolean credentialsNonExpired, boolean enabled, List<Role> authorities, List<ObjectId> tickets) {
+    public User(ObjectId id, String username, String password, String name, boolean accountNonExpired, boolean accountNonLocked, boolean credentialsNonExpired, boolean enabled, List<Role> authorities, List<ObjectId> tickets) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.name = name;

@@ -58,12 +58,7 @@ public class AuthenticationController {
                 response.setHeader(tokenName, tokenHandler.generateAccessToken(user.getId(), LocalDateTime.now().plusDays(14)));
                 Map<String, Object> userInfo = new HashMap<>();
                 userInfo.put("name", user.getName());
-                userInfo.put("roles",
-                        user.getAuthorities()
-                                .stream()
-                                .map(role -> role.getAuthority())
-                                .collect(Collectors.toList())
-                );
+                userInfo.put("username", user.getUsername());
                 return ResponseEntity.ok(tokenHandler.encode(userInfo));
             } else {
                 message = wrongPassword;
@@ -80,6 +75,10 @@ public class AuthenticationController {
     @PostMapping("/registration")
     public ResponseEntity registration(@RequestBody User user) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        user.setAccountNonExpired(true);
+        user.setAccountNonLocked(true);
+        user.setCredentialsNonExpired(true);
+        user.setEnabled(true);
         try {
             userService.saveUser(user);
             return new ResponseEntity(HttpStatus.OK);

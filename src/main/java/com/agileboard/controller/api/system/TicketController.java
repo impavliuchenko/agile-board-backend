@@ -20,6 +20,12 @@ public class TicketController {
         this.ticketService = ticketService;
     }
 
+    @GetMapping("/user/{id}")
+    public PersistentEntityResource findTicketsByUserId(@PathVariable("id") ObjectId id,
+                                                        PersistentEntityResourceAssembler asm){
+    return asm.toFullResource(ticketService.findTicketsByUserId(id));
+    }
+
     @PutMapping("/{id}/progress")
     @ResponseBody
     public PersistentEntityResource toInProgress(@PathVariable("id") ObjectId id,

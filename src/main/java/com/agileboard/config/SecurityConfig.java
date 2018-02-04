@@ -49,8 +49,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()//these urls are open
                 .anyRequest().authenticated()//these require authentication
                 .and()
-                .formLogin().loginPage("/login").permitAll()
-                .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
